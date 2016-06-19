@@ -1,0 +1,45 @@
+Task P3:
+1. The enumeration of ServiceType will change.
+2. All methods with "switch" in the ServiceRecord class should change, they are
+   public int getServicePoints(),
+   public int getCalloutFee(),
+   and public int getServiceFee().
+
+
+Task M8:
+1.In ServiceType class, I added a enumeration:
+       DISCOUNT("Discount services");
+2. In AbstractServiceRecord.createServiceRecord method, I add a switch case:
+       case DISCOUNT:
+         return new DiscountServiceRecord(hours);
+3. I add the whole DiscountServiceRecord class:
+public class DiscountServiceRecord extends AbstractServiceRecord {
+    public static int DISCOUNT_CALLOUT = 0;
+    public static int DISCOUNT_SERVICE_HOURLY = 80;
+    public static int DISCOUNT_SERVICEPTS_BASE = 0;
+    public static int DISCOUNT_SERVICEPTS_HOURLY = 0;
+
+    public DiscountServiceRecord (int hours) {
+        super(hours, ServiceType.DISCOUNT);
+        this.recordID = ++ nextRecordID;
+        buildInvoice();
+    }
+
+    // EFFECTS: returns number of service points earned with this service record
+    @Override
+    public int getServicePoints(){
+        return DISCOUNT_SERVICEPTS_BASE + hours * DISCOUNT_SERVICEPTS_HOURLY;
+    }
+
+    @Override
+    // EFFECTS: returns callout fee in $ for this service record
+    public int getCalloutFee() {
+        return DISCOUNT_CALLOUT;
+    }
+
+    @Override
+    // EFFECTS: returns service fee in $ for this service record
+    public int getServiceFee(){
+        return DISCOUNT_SERVICE_HOURLY * hours;
+    }
+}

@@ -1,0 +1,9 @@
+Task M5:
+1. In the rotateRight method, direction for the case LEFT should be direction = Direction.UP, but in the webCAT it is
+direction = Direction.RIGHT.
+2. When the snake eats two food whose nutritional values add up to more than 50, the snake should grow but in the webCAT,
+the snake does not grow.
+
+Task M6:
+The principle is Single Point Control. So in the code i is equal to 5, and when I change BOARD_COLS = 10 to 12 the test
+fails. If I rewrite i with i = BOARD_COLS / 2, no matter what value for BOARD_COLS, the test will always pass.
